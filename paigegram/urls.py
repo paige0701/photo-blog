@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views
 
-from photoblog.views import notloggedin, home
+from photoblog.views import notloggedin, home, register, accountactivationsent, activate
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,9 +30,15 @@ urlpatterns = [
     url(r'^$', home, name='home'),
 
     # Login
-    url(r'^login/$',views.login, {'template_name':'auth/login.html'}, name='login'),
+    url(r'^login/$', views.login, {'template_name':'auth/login.html'}, name='login'),
+    url(r'^logout/$', views.logout, {'next_page':'notloggedin'}, name='logout'),
 
     # Register
-    # url(r'^register/$', views, )
+    url(r'^register/$', register, name='register'),
 
+
+    url(r'^accountactivationsent/$', accountactivationsent, name='accountactivationsent'),
+
+    url(r'^activate/(?P<uuid>[0-9A-Za-z_\-]+)/$',
+        activate, name='activate'),
 ]

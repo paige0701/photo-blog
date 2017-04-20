@@ -118,11 +118,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
 
+# Static 파일이 어디에있는지 지정해주지 않으면 찾지를 못해서 부트스트랩 같은거 먹질 않음
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-
+# User 를 그냥 쓰지 않고 customise 를 한다면 이렇게 지정해줘야한다
 AUTH_USER_MODEL = 'photoblog.User'
+
+
+# 이메일 보내는것 세팅
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'paigechoi0701@gmail.com'
+EMAIL_HOST_PASSWORD = 'redhater07'
+EMAIL_PORT = 587
+
+
+# @login_required 사용할 때 여기로 간다
+LOGIN_URL = 'login'
+LOGOUT_URL = 'notloggedin'
+LOGIN_REDIRECT_URL = '/'
